@@ -1,75 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>QSS19 Midterm - ATUS Visualizations</title>
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body>
-    <div id="container"></div>
 
-    <h1>Comparison Metrics:</h1>
-    <div class="row">
-      <button id="btn-group1" type="button">Geographic Differences</button>
-      <button id="btn-group2" type="button">Group Differences</button>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <title>QSS19 Midterm - ATUS Visualizations</title>
+  <link rel="stylesheet" href="/styles.css" />
 
-    <div id="group1">
-      <div class="btnGroup">
-        <h1>Category to map by:</h1>
-        <div class="row">
-          <button id="btn-work" class="btn-graph work" type="button">Average Working Time (hrs)</button>
-          <button id="btn-educ" class="btn-graph educ" type="button">Average Education Time (hrs)</button>
-          <button id="btn-leis" class="btn-graph leis" type="button">Average Leisure Time (hrs)</button>
-          <button id="btn-ex" class="btn-graph ex" type="button">Average Exercise Time (hrs)</button>
-          <button id="btn-care" class="btn-graph care" type="button">Average Personal Care Time (hrs)</button>
+  <script>
+    $(document).ready(function() {
+      $('#group1').show();
+      $('#group2').hide();
+
+      $('#btn-group1').click(function() {
+        $('#group1').show();
+        $('#group2').hide();
+        $('img').removeClass("show");
+        $('img').addClass("hide");
+        $('img.work').removeClass("hide");
+        $('img.work').addClass("show");
+      })
+
+      $('#btn-group2').click(function() {
+        $('#group2').show();
+        $('#group1').hide();
+        $('img').removeClass("show");
+        $('img').addClass("hide");
+        $('img.sex').removeClass("hide");
+        $('img.sex').addClass("show");
+      })
+
+      $(".btn-graph").click(function() {
+        $('img').removeClass("show");
+        $('img').addClass("hide");
+        var className = $(this).attr("class").split(" ").filter(function(c) {
+          return c !== "btn-graph";
+        });
+        $("img." + className).removeClass("hide");
+        $("img." + className).addClass("show");
+      });
+    });
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    h1 {
+      margin-bottom: 0 !important;
+      text-align: center;
+    }
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 0rem 2rem 2rem 2rem;
+    }
+
+    button {
+      margin: 0.25rem;
+    }
+
+    img {
+      max-height: 60vh;
+    }
+
+    .show {
+      display: block;
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container"></div>
+
+  <h1>Comparison Metrics:</h1>
+  <div class="row">
+    <button id="btn-group1" type="button">Geographic Differences</button>
+    <button id="btn-group2" type="button">Group Differences</button>
+  </div>
+
+  <div id="group1">
+    <div class="btnGroup">
+      <h1>Category to map by:</h1>
+      <div class="row">
+        <button id="btn-work" class="btn-graph work" type="button">Average Working Time (hrs)</button>
+        <button id="btn-educ" class="btn-graph educ" type="button">Average Education Time (hrs)</button>
+        <button id="btn-leis" class="btn-graph leis" type="button">Average Leisure Time (hrs)</button>
+        <button id="btn-ex" class="btn-graph ex" type="button">Average Exercise Time (hrs)</button>
+        <button id="btn-care" class="btn-graph care" type="button">Average Personal Care Time (hrs)</button>
+      </div>
+      <div class="row">
+        <div class="graph1">
+          <img class="show work" src="./graphs/freq_work.png" alt="Frequency of Work Per Day by Hour and Sex">
+          <img class="hide educ" src="./graphs/freq_educ.png" alt="Frequency of Education Per Day by Hour and Sex">
+          <img class="hide leis" src="./graphs/freq_leis.png" alt="Frequency of Leisure Per Day by Hour and Sex">
+          <img class="hide ex" src="./graphs/freq_ex.png" alt="Frequency of Exercise Per Day by Hour and Sex">
+          <img class="hide care" src="./graphs/freq_pcare.png" alt="Frequency of Personal Care Per Day by Hour and Sex">
         </div>
-        <div class="row">
-          <div class="graph1">
-            <img class="show work" src="./graphs/freq_work.png" alt="Frequency of Work Per Day by Hour and Sex">
-            <img class="hide educ" src="./graphs/freq_educ.png" alt="Frequency of Education Per Day by Hour and Sex">
-            <img class="hide leis" src="./graphs/freq_leis.png" alt="Frequency of Leisure Per Day by Hour and Sex">
-            <img class="hide ex" src="./graphs/freq_ex.png" alt="Frequency of Exercise Per Day by Hour and Sex">
-            <img class="hide care" src="./graphs/freq_pcare.png" alt="Frequency of Personal Care Per Day by Hour and Sex">
-          </div>
-          <div class="graph2">
-            <img class="show work" src="./graphs/chor_work.png" alt="Average Work Time (Hours) Per Day by State">
-            <img class="hide educ" src="./graphs/chor_educ.png" alt="Average Education Time (Hours) Per Day by State">
-            <img class="hide leis" src="./graphs/chor_leis.png" alt="Average Leisure Time (Hours) Per Day by State">
-            <img class="hide ex" src="./graphs/chor_ex.png" alt="Average Exercise Time (Hours) Per Day by State">
-            <img class="hide care" src="./graphs/chor_pcare.png" alt="Average Personal Care Time (Hours) Per Day by State">
-          </div>
+        <div class="graph2">
+          <img class="show work" src="./graphs/chor_work.png" alt="Average Work Time (Hours) Per Day by State">
+          <img class="hide educ" src="./graphs/chor_educ.png" alt="Average Education Time (Hours) Per Day by State">
+          <img class="hide leis" src="./graphs/chor_leis.png" alt="Average Leisure Time (Hours) Per Day by State">
+          <img class="hide ex" src="./graphs/chor_ex.png" alt="Average Exercise Time (Hours) Per Day by State">
+          <img class="hide care" src="./graphs/chor_pcare.png"
+            alt="Average Personal Care Time (Hours) Per Day by State">
         </div>
       </div>
     </div>
+  </div>
 
-    <div id="group2">
-      <div class="btnGroup">
-        <h1>Category:</h1>
-        <div class="row">
-          <button id="btn-sex" class="btn-graph sex" type="button">Sex</button>
-          <button id="btn-race" class="btn-graph race" type="button">Race</button>
-          <button id="btn-inc" class="btn-graph inc" type="button">Income</button>
-          <button id="btn-emp" class="btn-graph emp" type="button">Employment Status</button>
+  <div id="group2">
+    <div class="btnGroup">
+      <h1>Category:</h1>
+      <div class="row">
+        <button id="btn-sex" class="btn-graph sex" type="button">Sex</button>
+        <button id="btn-race" class="btn-graph race" type="button">Race</button>
+        <button id="btn-inc" class="btn-graph inc" type="button">Income</button>
+        <button id="btn-emp" class="btn-graph emp" type="button">Employment Status</button>
+      </div>
+      <div class="row">
+        <div class="graph1">
+          <img class="show sex" src="./graphs/pie_sex.png" alt="Gender Distribution in Survey Respondents">
+          <img class="hide race" src="./graphs/pie_race.png" alt="Race Distribution in Survey Respondents">
+          <img class="hide inc" src="./graphs/pie_inc.png" alt="Income Distribution in Survey Respondents">
+          <img class="hide emp" src="./graphs/pie_emp.png" alt="Employment Distribution in Survey Respondents">
         </div>
-        <div class="row">
-          <div class="graph1">
-            <img class="show sex" src="./graphs/pie_sex.png" alt="Gender Distribution in Survey Respondents">
-            <img class="hide race" src="./graphs/pie_race.png" alt="Race Distribution in Survey Respondents">
-            <img class="hide inc" src="./graphs/pie_inc.png" alt="Income Distribution in Survey Respondents">
-            <img class="hide emp" src="./graphs/pie_emp.png" alt="Employment Distribution in Survey Respondents">
-          </div>
-          <div class="graph2">
-            <img class="show sex" src="./graphs/bar_sex.png" alt="Time Spent in Categories Per Day by Work">
-            <img class="hide race" src="./graphs/bar_race.png" alt="Time Spent in Categories Per Day by Education">
-            <img class="hide inc" src="./graphs/bar_inc.png" alt="Time Spent in Categories Per Day by Leisure">
-            <img class="hide emp" src="./graphs/bar_emp.png" alt="Time Spent in Categories Per Day by Personal Care">
-          </div>
+        <div class="graph2">
+          <img class="show sex" src="./graphs/bar_sex.png" alt="Time Spent in Categories Per Day by Work">
+          <img class="hide race" src="./graphs/bar_race.png" alt="Time Spent in Categories Per Day by Education">
+          <img class="hide inc" src="./graphs/bar_inc.png" alt="Time Spent in Categories Per Day by Leisure">
+          <img class="hide emp" src="./graphs/bar_emp.png" alt="Time Spent in Categories Per Day by Personal Care">
         </div>
       </div>
     </div>
+  </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="graphs.js"></script>
-  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="graphs.js"></script>
+</body>
+
 </html>
